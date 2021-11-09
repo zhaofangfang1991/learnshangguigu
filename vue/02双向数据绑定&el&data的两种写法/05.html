@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>事件修饰符</title>
+    <style>
+        * {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <a href="https://www.baidu.com" @click.prevent="outLine" > 点我跳到外网 </a>
+        <br>
+        <div @click="function2">
+            div1
+            <div @click.stop="function2">div2</div>
+        </div>
+        <br>
+        <button @click.once="oncefunction">这里测试once方法</button>
+        <br>
+        <h1>这里我测试vue的键盘事件 enter </h1>
+        <input type='text' value=''  placeholder="请输入用户名" @keyup.enter="showTip"/>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+           el: '#root',
+           methods: {
+               outLine(){
+                   console.log(1234);
+               },
+               function1(){
+                   console.log("div1");
+               },
+               function2(){
+                   console.log("div2");
+               },
+               oncefunction(){
+                   console.log("once");
+               },
+               showTip(e){
+                   console.log(e.target.value);
+               }
+           }
+        })
+    </script>
+</body>
+</html>

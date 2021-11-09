@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class和style绑定</title>
+    <style>
+        .aclass{
+            color: red;
+        }
+        .bclass{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id='app'>
+        <p :class="a">class绑定</p>
+        <p :style="{fontSize: size + 'px'}">style绑定</p>
+        <input type="button" value="更新" @click="update">
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                a: 'aclass',
+                size: 20
+            },
+            methods:{
+                update() {
+                    this.a = 'bclass',
+                    this.size = 50
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

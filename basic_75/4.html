@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监视</title>
+</head>
+<body>
+    <div id='app'>
+        <input type='text' value='' v-model="firstname"/><br>
+        <input type='text' v-model='secondname' /><br>
+        <input type='text' v-model='fullname1' /><br>
+        <input type='text' value='' v-model="fullname2" /><br>
+        双向： <input type='text' value='' v-model="fullname3" />
+    </div>
+    
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                firstname: 'z',
+                secondname: 'ff',
+                fullname2: 'zff',
+                
+            },
+            computed: {
+                fullname1 () {
+                    return this.firstname + ' ' + this.secondname
+                },
+                fullname3: {
+                    get() {
+                        return this.firstname +  ' ' + this.secondname
+                    },
+                    set (value) {
+                        const names = value.split(' ')
+                        this.firstname = names[0]
+                        this.secondname = names[1]
+                    }
+                }
+            },
+            watch: {
+                firstname: function(value) {
+                    this.fullname2 = value + ' ' + this.secondname
+                }
+            }
+        });
+        vm.$watch('secondname', function(value){
+            this.fullname2 =  this.firstname + '   ' + value
+        })
+    </script>
+</body>
+</html>

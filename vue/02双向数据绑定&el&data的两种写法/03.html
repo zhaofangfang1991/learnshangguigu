@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/vue.js"></script>
+    <title>数据代理</title>
+</head>
+<body>
+    <div id="root">
+        <h1></h1>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        let number = 55
+        let person = {
+            name: 'zff',
+            gender:'female',
+            // age: 19
+        }
+        Object.defineProperty(person, 'age', {
+            // value: number,
+            // enumerable: true,
+            // writable:true,
+            // configurable: true,
+            get: function(){
+                return number
+            },
+
+            // 当有人设置这个值时，调用这个方法
+            set(value){
+                console.log('设置这个值，传的值是' + value); 
+            }
+        })
+        console.log(person)
+
+        let obj = {
+            x: 100
+        }
+        let obj2 = {
+            y: 200
+        }
+
+        // 我现在想用obj2来操作obj的值
+        Object.defineProperty(obj, "x", {
+            get(){
+                return obj2.y
+            },
+            set(value){
+                console.log(obj.x = value)
+            }
+        })
+    </script>
+</body>
+</html>

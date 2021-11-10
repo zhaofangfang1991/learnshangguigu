@@ -7,6 +7,27 @@
     <title>条件渲染</title>
 </head>
 <body>
-    
+    <!-- 条件渲染有两种 v-if v-else  和 v-show     切换特别频繁的时候，用v-show，因为v-if组合会在内存中删除添加DOM元素，会慢；而v-show是display:none，块 -->
+
+    <div id="app">
+        <p v-if='ok'>成功</p>
+        <p v-else>失败</p>
+
+        <p v-show="ok">v-show</p>
+
+        <button @click="ok=!ok">切换</button>
+
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                ok: true
+            }
+        })
+    </script>
+
 </body>
 </html>

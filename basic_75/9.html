@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单数据自动收集</title>
+</head>
+<body>
+    <form id='app' action="" @submit.prevent="login">
+        <p>账号</p><input type='text' value='' name="username" v-model="username"/><br>
+        <p>密码</p><input type='password' value='' name="password" v-model="password" /><br><br>
+
+        <p>性别：</p>
+        男：<input type="radio" name="gender" value="男" id="1" v-model="gender">
+        女：<input type="radio" name="gender" value="女" id="2" v-model="gender"> <br>
+
+        <input type="submit" value="登录">  
+
+    </form>
+    
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app', 
+            data: {
+                username: '',
+                password: '',
+                gender: '男'
+            },
+            methods: {
+                login() {
+                    console.log(this.username, this.password, this.gender)
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染</title>
+</head>
+<body>
+
+    <div id="app">
+        <p>渲染数组</p>
+        <ul>
+            <li v-for="(p, index) in persons" :key='index'>
+                {{index}} -- {{p.name}} -- {{p.age}} -- <button @click="del(index)">删除</button> 
+                -- <button @click="update(index, {name: 'cat', age: 2})">更新</button>
+                -- <button @click="add(index, {name: 'dog', age: 5})">增加</button>
+            </li>
+        </ul>
+        <br>
+        <p>渲染对象</p>
+        <ul>
+            <li v-for="(value, key) in persons[2]">{{key}} -- {{value}}</li>
+        </ul>
+    </div>
+    
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                persons: [
+                    {name: 'TOM', age: 18},
+                    {name: 'TOM2', age: 28},
+                    {name: 'TOM3', age: 38},
+                    {name: 'TOM4', age: 48},
+                ]
+            },
+            methods: {
+                del(index) {
+                    this.persons.splice(index, 1)
+                },
+
+                // splice 能实现增 删 改
+                update(index, newVal) {
+                    this.persons.splice(index, 1, newVal)
+                },
+
+                add (index, newVal) {
+                    this.persons.splice(index, 0, newVal)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,61 +1,86 @@
 <template>
-    <li class="list-group-item">
-        <div class="handle">
-        <a href="javascript:;" @click="deleteComment(index)">删除</a>
-        </div>
-        <p class="user"><span >{{comment.name}}</span><span>说:</span></p>
-        <p class="centence">{{comment.content}}</p>
+    <li @mouseenter="enterli(true)" @mouseleave="enterli(false)" :style={background:bgColor}>
+        <label>
+        <input type="checkbox" v-model="todolist.status" />
+        <span>{{todolist.content}}</span>
+        </label>
+        <button class="btn btn-danger" v-show="isShow" style="display:block" @click="delItem(index)">删除</button>
     </li>
 </template>
 
 <script>
+
 export default {
-    props:{
-        comment: Object,
-        index: Number,
-        deleteComments: Function
+    data() {
+        return {
+            bgColor: 'white',
+            isShow: false
+        }
+    },
+    props: {
+        'todolist': Object,
+        'index' : Number,
+        'delTodo': Function
     },
     methods: {
-        deleteComment() {
-            const {index, deleteComments, comment} = this
-
-            if (window.confirm(`Are you sure to delete content by ${comment.name}?`)) {
-                deleteComments(index)
+        enterli(isEnter) {
+            if (isEnter) {
+                this.bgColor = '#ccc'
+                this.isShow = true
+            } else {
+                this.bgColor = 'white'
+                this.isShow = false
             }
+        },
+        delItem(index) {
+            console.log(index);
+            // 确认
+            if(window.confirm(`确认删除${this.todolist.content}吗？`)) {
+                // 删除
+                this.delTodo(index)
+            }
+
+
         }
     }
+    
     
 }
 </script>
 
+
 <style scoped>
-
-
 li {
-  transition: .5s;
-  overflow: hidden;
+  list-style: none;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 5px;
+  border-bottom: 1px solid #ddd;
 }
 
-.handle {
-  width: 40px;
-  border: 1px solid #ccc;
-  background: #fff;
-  position: absolute;
-  right: 10px;
-  top: 1px;
-  text-align: center;
+li label {
+  float: left;
+  cursor: pointer;
 }
 
-.handle a {
-  display: block;
-  text-decoration: none;
+li label li input {
+  vertical-align: middle;
+  margin-right: 6px;
+  position: relative;
+  top: -1px;
 }
 
-.list-group-item .centence {
-  padding: 0px 50px;
+li button {
+  float: right;
+  display: none;
+  margin-top: 3px;
 }
 
-.user {
-  font-size: 22px;
+li:before {
+  content: initial;
+}
+
+li:last-child {
+  border-bottom: none;
 }
 </style>

@@ -1,59 +1,58 @@
 <template>
-    <div>
-        <header class="site-header jumbotron">
-        <div class="container">
-            <div class="row">
-            <div class="col-xs-12">
-                <h1>请发表对自己的规划</h1>
-            </div>
-            </div>
-        </div>
-        </header>
-        <div class="container">
-            <Add :addComments="addComments"/>
-            <List :comments="comments" :deleteComments="deleteComments"/>
-        </div>
+  <div class="todo-container">
+    <div class="todo-wrap">
+      <Header :addTodo="addTodo"/>
+      <List :todolists="todolists" :delTodo="delTodo"/>
+      <Footer/>
     </div>
+  </div>
 </template>
 
 <script>
-import Add from './components/Add.vue'
-import List from './components/List.vue'
-
+import Footer from './components/footer.vue';
+import Header from './components/header.vue';
+import List from './components/list.vue';
 export default {
     data() {
         return {
-            comments: [
+            todolists: [
                 {
-                    name: 'Bob',
-                    content: '我是Bob，我来了'
+                    content: '背英语单词',
+                    status: true
                 },
                 {
-                    name: 'Eob',
-                    content: '我是Eob，我来学vue了'
+                    content: '锻炼身体',
+                    status: false
                 },
                 {
-                    name: 'Xob',
-                    content: '我是Xob，我要年底换工作。全栈+算法，加油！'
+                    content: '泡脚',
+                    status: false
                 },
             ]
         }
     },
-    components: {
-        Add, List
-    },
+    components: {Header, List, Footer},
     methods: {
-        addComments(comment) {
-            this.comments.unshift(comment)
+        addTodo(todoObject) {
+            this.todolists.unshift(todoObject)
         },
-
-        deleteComments(index) {
-            this.comments.splice(index, 1)
+        delTodo(index) {
+            this.todolists.splice(index, 1)
         }
     }
+    
 }
 </script>
 
-<style scoped>
 
+<style scoped>
+.todo-container {
+  width: 600px;
+  margin: 0 auto;
+}
+.todo-container .todo-wrap {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
 </style>
